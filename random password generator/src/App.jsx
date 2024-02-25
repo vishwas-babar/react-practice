@@ -12,10 +12,8 @@ function App() {
     generatePassword();
   }, [passwordLength, includeSymbols, includeNumbers]);
 
-  // const cache = useCallback(generatePassword, [passwordLength, includeNumbers, includeSymbols]);
 
-
-  const generatePassword = () => {
+  const generatePassword = useCallback(() => {
     const lettersWithChar = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const lettersWithNumbers = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     const lettersWithSymbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
@@ -40,7 +38,7 @@ function App() {
     }
 
     setRandomPassword(password);
-  }
+  }, [passwordLength, includeSymbols, includeNumbers, randomPassword])
 
   const copyToClipboard = async () => {
     try {
@@ -67,7 +65,8 @@ function App() {
         <div className='h-fit w-96 bg-slate-900 rounded-md mt-12 shadow-lg p-3 flex flex-col'>
 
           <div className='flex items-center justify-between bg-white rounded-md overflow-hidden '>
-            <p className='p-2'>{randomPassword}</p>
+            {/* <p className='p-2'>{randomPassword}</p> */}
+            <input className='w-full p-2' type="text" placeholder='password' value={randomPassword} />
             <a onClick={copyToClipboard} className='h-full bg-green-500 flex items-center justify-center px-4 border-l cursor-pointer'>copy</a>
           </div>
 
